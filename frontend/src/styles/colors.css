@@ -1,0 +1,10 @@
+:root {
+  --main-bg: #fff;      /* hlavní barva pozadí */
+  --main-logo-bg: #fef8ee;      /* hlavní barva pozadí */
+  --main-logo: #ac2121;    /* hlavní barva loga */
+  --sidebar-bg: #8a1919;   /* tmavě červená pro sidebar */
+  --icon-color: #fef8ee;   /* béžová pro ikony */
+  --icon-active: #ac2121;
+  --test-color: #8a1919;
+  --text-color: #000000;      /* tmavě šedá pro text */
+}

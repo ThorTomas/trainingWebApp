@@ -1,0 +1,125 @@
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 60px;
+  background: #ffffff;
+  color: #000000;
+  z-index: 2000;
+  transition: width 0.3s;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sidebar.open {
+  width: 220px;
+}
+.sidebar-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1em 0.5em 0.5em 0.5em;
+}
+.sidebar-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-right: 10px;
+}
+.sidebar-toggle .bar {
+  width: 24px;
+  height: 3px;
+  background: #000000;
+  display: block;
+  border-radius: 2px;
+}
+.sidebar-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: 8px;
+}
+.sidebar-profile {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1em 0.5em;
+  gap: 10px;
+}
+.sidebar-profile-info {
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-profile-pic {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #444;
+}
+.sidebar-profile span {
+  font-size: 1em;
+  font-weight: 500;
+  white-space: nowrap;
+  display: none;
+}
+#sidebarProfileName {
+  display: none !important;
+}
+.sidebar-profile-username {
+  font-size: 0.85em;
+  color: #444;
+  margin-left: 2px;
+  margin-top: -2px;
+  display: none;
+}
+.sidebar.open .sidebar-profile-username {
+  display: block;
+}
+/* DEBUG: dočasně vždy zobrazit username červeně */
+.sidebar-profile-username {
+  display: block !important;
+  color: red !important;
+}
+.sidebar.open .sidebar-title,
+.sidebar.open .sidebar-profile span,
+.sidebar.open .nav-label {
+  display: inline;
+}
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 1em;
+}
+.sidebar-nav a {
+  color: #000000;
+  text-decoration: none;
+  padding: 0.8em 1em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s;
+}
+.sidebar-nav a:hover {
+  background: #333;
+}
+.icon {
+  font-size: 1.3em;
+}
+.nav-label {
+  display: none;
+  font-size: 1em;
+}
+.sidebar.open .nav-label {
+  display: inline;
+}
+#mainContent {
+  transition: margin-left 0.3s;
+  margin-left: 60px; /* výchozí šířka sidebaru */
+}
+.sidebar.open + #mainContent {
+  margin-left: 220px; /* šířka rozbaleného sidebaru */
+}

@@ -1,0 +1,1 @@
+Ctrl+Shift+P -> Preferences: Open User Settings (JSON) -> "liveServer.settings.root": "/frontend/public"

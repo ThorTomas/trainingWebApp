@@ -1,14 +1,4 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.env
-**/venv/
+# Visual Folder
+visual/
 
-# VSCode
-.vscode/
-
-# OS
-.DS_Store
-Thumbs.db
+.code-workspace

@@ -12,12 +12,14 @@ class User(db.Model):
     reset_token_expiry = db.Column(db.DateTime, nullable=True)
     created_at = db.Column(db.DateTime, default=db.func.now())
     is_active = db.Column(db.Boolean, default=False) # False = uživatel nedokončil registraci
+    role = db.Column(db.String(20), default="user")
 
     profile = db.relationship(
         "UserProfile",
         back_populates="user",
         uselist=False,
-        cascade="all, delete-orphan"
+        cascade="all, delete-orphan",
+        foreign_keys="[UserProfile.user_id]"
     )
     
     def __repr__(self):

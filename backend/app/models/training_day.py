@@ -8,6 +8,7 @@ class TrainingDay(db.Model):
     season_id = db.Column(db.Integer, db.ForeignKey('seasons.id'), nullable=False)
     day_index = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False, unique=True)
+    cycle = db.Column(db.Integer, nullable=True)
 
     user_records = db.relationship('UserTrainingRecord', backref='training_day', lazy=True)
 

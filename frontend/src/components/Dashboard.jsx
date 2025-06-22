@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
-import Home from "./dashboard/Home";
-import Profile from "./dashboard/Profile";
-import Settings from "./dashboard/Settings";
-import OverviewStats from "./dashboard/OverviewStats";
-
-const API_BASE = "http://127.0.0.1:5000";
+import { useDashboardData } from "./dashboard/useDashboardData";
 
 function Dashboard() {
-  const [selected, setSelected] = useState("home");
-  const [user, setUser] = useState(null);
+  const dashboardData = useDashboardData();
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,13 +14,6 @@ function Dashboard() {
       navigate("/login");
       return;
     }
-    fetch(`${API_BASE}/api/user/profile`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(res => res.json())
-      .then(profile => {
-        setUser(profile);
-      });
   }, [navigate]);
 
   function handleLogout() {
@@ -33,41 +21,25 @@ function Dashboard() {
     sessionStorage.removeItem("token");
     localStorage.removeItem("username");
     localStorage.removeItem("rememberedIdentifier");
-    setUser(null);
     navigate("/login");
   }
 
-  let Content;
-  switch (selected) {
-    case "overviewStats":
-      Content = <OverviewStats />;
-      break;
-    case "profile":
-      Content = <Profile />;
-      break;
-    case "settings":
-      Content = <Settings />;
-      break;
-    case "home":
-    default:
-      Content = <Home />;
-    
-  }
-
   return (
-    <>
-      <div className="dashboard-bg">
-        <div className="dashboard-layout">
-          <Sidebar
-            user={user}
-            selected={selected}
-            setSelected={setSelected}
-            onLogout={handleLogout}
-          />
-          <main className="dashboard-background">{Content}</main>
-        </div>
+    <div className="dashboard-bg">
+      <div className="dashboard-layout">
+        <Sidebar
+          user={dashboardData.user}
+          onLogout={handleLogout}
+          open={sidebarOpen}
+          setOpen={setSidebarOpen}
+        />
+        <main className={`dashboard-background${sidebarOpen ? " sidebar-open" : " sidebar-closed"}`}>
+          <div className="dashboard-content">
+            <Outlet context={dashboardData} />
+          </div>
+        </main>
       </div>
-    </>
+    </div>
   );
 }
 

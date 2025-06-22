@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
 import "../styles/Sidebar.css";
-import { Menu, Home, User, Settings, UserCircle, LogOut } from "lucide-react";
+import { Menu, Home, User, Settings, UserCircle, LogOut, Users, ChevronDown } from "lucide-react";
 
-const menuItems = [
-  { key: "home", icon: <Home />, label: "Activities" },
-  { key: "profile", icon: <User />, label: "Profile" },
-  { key: "settings", icon: <Settings />, label: "Settings" },
-];
+function Sidebar({ user, onLogout, open, setOpen }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { t, i18n } = useTranslation();
+  const [langMenuOpen, setLangMenuOpen] = React.useState(false);
 
-function Sidebar({ user, selected, setSelected, onLogout }) {
-  const [open, setOpen] = useState(true);
+  const languages = [
+    { code: "cs", label: "Čeština" },
+    { code: "en", label: "English" },
+  ];
+
+  const menuItems = [
+    { key: "home", icon: <Home />, label: t("home"), path: "/dashboard/home" },
+    { key: "profile", icon: <User />, label: t("profile"), path: "/dashboard/profile" },
+    { key: "groups", icon: <Users />, label: t("groups"), path: "/dashboard/groups" },
+    { key: "settings", icon: <Settings />, label: t("settings"), path: "/dashboard/settings" },
+  ];
 
   return (
     <nav className={`sidebar${open ? " open" : " closed"}`}>
@@ -24,7 +36,7 @@ function Sidebar({ user, selected, setSelected, onLogout }) {
         {open && (
           <span
             className="sidebar-title"
-            onClick={() => setSelected("home")}
+            onClick={() => navigate("/dashboard/home")}
             style={{ cursor: "pointer" }}
           >
             Tendor
@@ -43,10 +55,10 @@ function Sidebar({ user, selected, setSelected, onLogout }) {
       {/* PROFILOVÝ BOX */}
       <div
         className={`sidebar-profile${
-          selected === "overviewStats" ? " active" : ""
+          location.pathname === "/dashboard/overview" ? " active" : ""
         }`}
         style={{ cursor: "pointer" }}
-        onClick={() => setSelected("overviewStats")}
+        onClick={() => navigate("/dashboard/overview")}
         title="Show statistics and overview"
       >
         {user?.profilePhotoUrl ? (
@@ -70,8 +82,8 @@ function Sidebar({ user, selected, setSelected, onLogout }) {
         {menuItems.map(item => (
           <li
             key={item.key}
-            className={selected === item.key ? "active" : ""}
-            onClick={() => setSelected(item.key)}
+            className={location.pathname === item.path ? "active" : ""}
+            onClick={() => navigate(item.path)}
             title={item.label}
           >
             {item.icon}
@@ -79,6 +91,36 @@ function Sidebar({ user, selected, setSelected, onLogout }) {
           </li>
         ))}
       </ul>
+      {open && (
+        <div className="sidebar-lang-btn-wrapper">
+          <button
+            className="sidebar-lang-btn"
+            onClick={() => setLangMenuOpen(v => !v)}
+            title={t("change_language") || "Změnit jazyk"}
+          >
+            <span>
+              {languages.find(l => l.code === i18n.language)?.label || i18n.language.toUpperCase()}
+            </span>
+            <ChevronDown size={18} />
+          </button>
+          {langMenuOpen && (
+            <ul className="sidebar-lang-dropdown">
+              {languages.map(lang => (
+                <li
+                  key={lang.code}
+                  className={i18n.language === lang.code ? "active" : ""}
+                  onClick={() => {
+                    i18n.changeLanguage(lang.code);
+                    setLangMenuOpen(false);
+                  }}
+                >
+                  {lang.label}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
     </nav>
   );
 }

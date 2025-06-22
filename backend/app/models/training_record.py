@@ -10,13 +10,14 @@ class UserTrainingRecord(db.Model):
     slot = db.Column(db.Integer, nullable=False)  # Slot number for the training record
 
     name = db.Column(db.String(100)) # Name of the training
-    training_type = db.Column(db.String(50))  # AP / ANP / Rege / Athletic / ...
+    main_ttype = db.Column(db.String(50))  # e.g. "Run", "Bike", "Swim", "Strength"
+    sub_ttype = db.Column(db.String(50))  # e.g. "AP", "ANP", "Rege", "Athletic"
     detail = db.Column(db.String(50))  # e.g. "1×40’" or "3×1000m"
     completed = db.Column(db.Boolean, default=False)  # Whether the training was completed
     notes = db.Column(db.Text)  # Notes for the training record
     distance = db.Column(db.Float, default=0.0)  # Distance covered in the training (in kilometers)
     duration = db.Column(db.Integer, default=0)  # Duration of the training in minutes
-    time = db.Column(db.String(5))  # Time of the activity (HH:MM)
+    time = db.Column(db.String(8))  # Time of the activity (HH:MM:SS)
 
     __table_args__ = (
         db.UniqueConstraint('user_id', 'training_day_id', 'slot', name='uq_user_day_slot'),
@@ -33,7 +34,8 @@ class UserTrainingRecord(db.Model):
             'training_day_id': self.training_day_id,
             'slot': self.slot,
             'name': self.name,
-            'training_type': self.training_type,
+            'm': self.main_ttype,
+            's': self.sub_ttype,
             'detail': self.detail,
             'completed': self.completed,
             'notes': self.notes,

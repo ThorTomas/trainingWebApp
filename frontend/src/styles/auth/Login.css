@@ -19,7 +19,7 @@
 }
 
 .login-bg {
-  background: var(--main-logo-bg, #fef8ee); /* nebo jinou barvu podle potřeby */
+  background: var(--color-bg-logo, #fef8ee);
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -31,28 +31,28 @@
 .login-box input, .login-box select, .login-box textarea {
   width: 100% !important;
   box-sizing: border-box;
-  background: var(--secondary-bg, #fff);
-  border: 1px solid var(--border, #e0d6c3);
+  background: var(--color-bg-main, #fff);
+  border: 1px solid var(--color-border, #e0e0e0);
   border-radius: 4px;
   padding: 20px 14px;
   font-size: 1em;
   height: 40px;
   margin-bottom: 16px;
-  color: var(--main-text, #222);
+  color: var(--color-text-main, #222);
 }
 
 input, select, textarea {
-  background: var(--secondary-bg, #fff);
-  border: 1px solid var(--border, #e0d6c3);
+  background: var(--color-bg-main, #fff);
+  border: 1px solid var(--color-border, #e0e0e0);
   border-radius: 4px;
   padding: 8px;
   font-size: 1em;
   margin-bottom: 8px;
-  color: var(--main-text, #222);
+  color: var(--color-text-main, #222);
 }
 
 a {
-  color: var(--main-logo);
+  color: var(--color-primary, #ac2121);
   text-decoration: none;
 }
 a:hover {
@@ -60,8 +60,8 @@ a:hover {
 }
 
 .container {
-  background: var(--secondary-bg, #fff);
-  border: 1px solid var(--border, #e0d6c3);
+  background: var(--color-bg-main, #fff);
+  border: 1px solid var(--color-border, #e0e0e0);
   border-radius: 8px;
   padding: 2em;
   margin: 2em auto;
@@ -71,11 +71,10 @@ a:hover {
 
 /* Header */
 .header-auth {
-  background: var(--main-logo-bg, #f8f5f0);
-  color: var(--main-logo, #8a1919);
+  background: var(--color-bg-logo, #fef8ee);
+  color: var(--color-primary-dark, #8a1919);
   padding: 1.5em 0 1em 2em;
   text-align: left;
-
   margin-bottom: 0em;
   box-shadow: 0 2px 8px rgba(172,33,33,0.04);
 }
@@ -84,7 +83,7 @@ a:hover {
   font-size: 2.2em;
   letter-spacing: 0.05em;
   font-weight: bold;
-  color: var(--main-logo, #8a1919);
+  color: var(--color-primary-dark, #8a1919);
 }
 
 /* Footer */
@@ -92,14 +91,14 @@ a:hover {
   width: 100%;
   text-align: left;
   padding: 1em 0 1em 2em;
-  background: var(--main-logo-bg, #f8f5f0);
-  color: var(--main-logo, #8a1919);
+  background: var(--color-bg-logo, #fef8ee);
+  color: var(--color-primary-dark, #8a1919);
 }
 
 /* Buttons */
 .button-auth {
-  background: var(--button-bg, var(--main-logo));
-  color: var(--button-text, #fff);
+  background: var(--color-primary, #ac2121);
+  color: var(--color-text-invert, #fff);
   border: none;
   border-radius: 4px;
   padding: 10px 18px;
@@ -112,7 +111,7 @@ a:hover {
   cursor: not-allowed;
 }
 .button-auth:hover:not(:disabled) {
-  background: var(--button-bg-hover, #8a1919);
+  background: var(--color-primary-dark, #8a1919);
 }
 
 /* Login box */
@@ -121,10 +120,10 @@ a:hover {
   width: 100%;
   margin: auto;
   padding: 24px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border, #e0e0e0);
   border-radius: 8px;
-  background: rgb(254, 248, 238, 0.8); /* šedé poloprůhledné pozadí */
-  color: var(--main-text, #222);
+  background: rgba(254, 248, 238, 0.8);
+  color: var(--color-text-main, #222);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -143,7 +142,7 @@ a:hover {
   font-size: 2.2em;
   font-weight: bold;
   text-align: center;
-  color: var(--main-logo, #8a1919);
+  color: var(--color-primary-dark, #8a1919);
   margin: 0;
   padding: 0;
   line-height: 1;
@@ -202,7 +201,6 @@ a:hover {
   100% { opacity: 0; transform: translateY(20px); }
 }
 
-
 .login-options-row {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -220,14 +218,14 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.5em;
-  color: var(--main-text, #222);
+  color: var(--color-text-main, #222);
   line-height: 1;
   white-space: nowrap;
 }
 
 .remember-me input[type="checkbox"] {
   transform: scale(1.2);
-  accent-color: var(--main-logo);
+  accent-color: var(--color-primary, #ac2121);
   margin: 0;
 }
 
@@ -247,7 +245,7 @@ a:hover {
   width: 18px;
   height: 18px;
   border: 2.5px solid #fff;
-  border-top: 2.5px solid var(--main-logo, #8a1919);
+  border-top: 2.5px solid var(--color-primary-dark, #8a1919);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
   margin-right: 10px;

@@ -13,13 +13,27 @@ def get_or_create_season(year):
         season = Season(year=year, start_date=start_date, end_date=end_date)
         db.session.add(season)
         db.session.commit()
-        # vytvoř dny v sezóně
+        # Vytvoř dny v sezóně
         delta = (end_date - start_date).days + 1
+        days = []
         for i in range(delta):
+            day_date = start_date + timedelta(days=i)
+            days.append(day_date)
+        # Najdi první pondělí
+        first_monday_idx = next(i for i, d in enumerate(days) if d.weekday() == 0)
+        for i, day_date in enumerate(days):
+            # Urči cyklus
+            if i < first_monday_idx:
+                cycle = 0  # nultý cyklus
+            else:
+                cycle = ((i - first_monday_idx) // 7) + 1
+                if cycle > 12:
+                    cycle = 13
             day = TrainingDay(
                 season_id=season.id,
-                date=start_date + timedelta(days=i),
-                day_index=i + 1
+                date=day_date,
+                day_index=i + 1,
+                cycle=cycle
             )
             db.session.add(day)
         db.session.commit()
@@ -41,7 +55,8 @@ def create_training_record(user_id, data):
         training_day_id=data["training_day_id"],
         slot=data["slot"],
         name=data.get("name"),
-        training_type=data.get("training_type"),
+        main_ttype=data.get("main_ttype"),
+        sub_ttype=data.get("sub_ttype"),
         detail=data.get("detail"),
         completed=data.get("completed", False),
         notes=data.get("notes"),
@@ -54,9 +69,12 @@ def create_training_record(user_id, data):
 
 def update_training_record(record, data):
     record.name = data.get("name", record.name)
-    record.training_type = data.get("training_type", record.training_type)
+    record.main_ttype = data.get("main_ttype", record.main_ttype)
+    record.sub_ttype = data.get("sub_ttype", record.sub_ttype)
     record.detail = data.get("detail", record.detail)
     record.completed = data.get("completed", record.completed)
+    record.distance = data.get("distance", record.distance)
+    record.duration = data.get("duration", record.duration)
     db.session.commit()
     return record.to_dict()
 
@@ -64,6 +82,11 @@ def get_or_create_training_days(year):
     season = get_or_create_season(year)
     days = TrainingDay.query.filter_by(season_id=season.id).all()
     return [
-        {"id": day.id, "date": day.date.isoformat(), "day_index": day.day_index}
+        {
+            "id": day.id,
+            "date": day.date.isoformat(),
+            "day_index": day.day_index,
+            "cycle": day.cycle
+        }
         for day in days
     ]

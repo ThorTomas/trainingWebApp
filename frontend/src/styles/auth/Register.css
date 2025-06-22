@@ -1,5 +1,7 @@
+@import '../colors.css';
+
 .register-fullbox {
-  background: var(--main-logo-bg);
+  background: var(--color-bg-logo, #fef8ee);
   border: none;
   max-width: 400px;
   width: 100%;
@@ -36,7 +38,7 @@
   transform: scale(1.2);
   width: 18px;
   height: 18px;
-  accent-color: var(--main-logo);
+  accent-color: var(--color-primary, #ac2121);
   margin: 0;
   margin-top: 0.15em;
   flex-shrink: 0;
@@ -63,7 +65,7 @@
   max-width: 320px;
   text-align: center;
   font-size: 0.95em;
-  color: var(--main-text, #222);
+  color: var(--color-text-main, #222);
   font-weight: bold;
 }
 
@@ -83,7 +85,7 @@
 
 .register-bg {
   flex: 1 0 auto;
-  background: var(--main-logo-bg, #fef8ee);
+  background: var(--color-bg-logo, #fef8ee);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -111,14 +113,14 @@
 }
 
 .left-side {
-  background: linear-gradient(80deg, #5a5a5a 0%, #ccba9e 100%);
+  background: linear-gradient(80deg, #5a5a5a 0%, var(--color-primary-light, #ccba9e) 100%);
   height: 100%;
   width: 100%;
   min-width: 60px;
 }
 
 .right-side {
-  background: linear-gradient(80deg, #ccba9e 0%, #5a5a5a 100%);
+  background: linear-gradient(80deg, var(--color-primary-light, #ccba9e) 0%, #5a5a5a 100%);
   height: 100%;
   width: 100%;
   min-width: 60px;
@@ -137,7 +139,7 @@
   width: 18px;
   height: 18px;
   border: 2.5px solid #fff;
-  border-top: 2.5px solid var(--main-logo, #8a1919);
+  border-top: 2.5px solid var(--color-primary-dark, #8a1919);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
   margin-right: 10px;

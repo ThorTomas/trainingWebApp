@@ -1,10 +1,40 @@
 :root {
-  --main-bg: #fff;      /* hlavní barva pozadí */
-  --main-logo-bg: #fef8ee;      /* hlavní barva pozadí */
-  --main-logo: #ac2121;    /* hlavní barva loga */
-  --sidebar-bg: #8a1919;   /* tmavě červená pro sidebar */
-  --icon-color: #fef8ee;   /* béžová pro ikony */
-  --icon-active: #ac2121;
-  --test-color: #8a1919;
-  --text-color: #000000;      /* tmavě šedá pro text */
+  /* Základní pozadí a text */
+  --color-bg-main: #fff;
+  --color-bg-secondary: #f9f9f9;
+  --color-bg-logo: #fef8ee;
+  --color-bg-sidebar: #8a1919;
+  --color-bg-sidebar-dark: #6b1212;
+  --color-bg-header: #f3f3f3;
+  --color-bg-profile: #eee;
+  --color-bg-dropdown: #fff;
+
+  /* Primární barvy a akcenty */
+  --color-primary: #ac2121;
+  --color-primary-dark: #8a1919;
+  --color-primary-light: #ccba9e;
+
+  /* Text */
+  --color-text-main: #222;
+  --color-text-header: #444;
+  --color-text-invert: #fff;
+  --color-text-muted: #888;
+
+  /* Ikony */
+  --color-icon: #fef8ee;
+  --color-icon-active: #ac2121;
+
+  /* Border */
+  --color-border: #e0e0e0;
+  --color-border-strong: #ddd;
+
+  /* Tlačítka */
+  --color-btn-bg: #fff;
+  --color-btn-bg-hover: #d3d3d3;
+  --color-btn-border: #e0e0e0;
+  --color-btn-text: #8a1919;
+  --color-btn-popup: #bbb;
+
+  /* Další */
+  --color-shadow: 0 2px 16px 0 rgba(0,0,0,0.08);
 }

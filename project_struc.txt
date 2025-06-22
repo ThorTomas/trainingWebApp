@@ -1,37 +1,80 @@
 trainingWebApp/
 │
 ├── backend/
-│   ├── app/
-│   │   ├── __init__.py            # inicializace Flasku, blueprinty, DB
-│   │   ├── models/                # SQLAlchemy modely (uživatelé, tréninky...)
-│   │   │   ├── __init__.py
-│   │   │   └── user.py
-│   │   │   └── workout.py
-│   │   │   └── ...
-│   │   ├── routes/                # Blueprinty pro jednotlivé části aplikace
-│   │   │   ├── __init__.py
-│   │   │   └── auth.py            # login, register, logout
-│   │   │   └── training.py        # API pro tréninky
-│   │   │   └── calendar.py        # API pro kalendář
-│   │   ├── services/              # pomocné funkce, validace, autentizace
-│   │   │   ├── auth_service.py
-│   │   │   └── calendar_utils.py
-│   │   └── config.py              # konfigurace (DB, tajné klíče, ...)
-│   │
-│   ├── run.py                     # entrypoint pro Flask aplikaci
-│   ├── requirements.txt
+│   ├── run.py                   # entry point for the Flask app
+│   ├── requirements.txt         # backend dependencies
+│   ├── venv                     # Python virtual environment
+│   ├── .env                     # environment variables (e.g. DB, secrets)
+│   └── app/
+│       ├── __init__.py          # Flask initialization, blueprints, DB setup
+│       ├── config.py            # application configuration
+│       ├── extensions.py        # extensions (e.g. DB, login manager)
+│       ├── models/              # SQLAlchemy models (users, trainings, ...)
+│       │   ├── __init__.py
+│       │   ├── user.py
+│       │   ├── season.py
+│       │   └── ...              # more models
+│       ├── routes/              # API routes (blueprints)
+│       │   ├── __init__.py
+│       │   ├── auth.py          # login, registration, password reset
+│       │   ├── training.py      # API for trainings
+│       │   ├── calendar.py      # API for calendar
+│       │   └── ...              # more routes
+│       ├── services/            # helper services and business logic
+│       │   ├── auth_service.py
+│       │   ├── calendar_utils.py
+│       │   └── ...              # more services
+│       ├── utils/               # utility functions (e.g. for trainings)
+│       │   └── training_utils.py
+│       └── instance/
+│           └── training.db      # SQLite database (for development)
 │
 ├── frontend/
-│   ├── public/                    # HTML šablony, statické soubory (CSS, JS)
-│   │   ├── index.html
-│   │   └── login.html
-│   │   └── register.html
-│   │   └── calendar.html
-│   ├── static/
-│   │   ├── css/
-│   │   ├── js/
-│   └── main.js                    # logika frontendu (volání API atd.)
+│   ├── package.json             # frontend dependencies
+│   ├── vite.config.js           # Vite configuration
+│   ├── index.html               # main HTML template
+│   ├── public/                  # public static files (favicon, images)
+│   │   ├── trainninger_web_icon.png
+│   │   └── vite.svg
+│   └── src/
+│       ├── App.jsx              # main React component
+│       ├── main.jsx             # React entry point
+│       ├── i18n.js              # translations (i18next)
+│       ├── index.css            # global styles
+│       ├── assets/              # images and other assets
+│       │   └── login_bg.png
+│       ├── components/          # React components
+│       │   ├── Dashboard.jsx
+│       │   ├── Home.jsx
+│       │   ├── Sidebar.jsx
+│       │   ├── auth/            # components for login/registration
+│       │   │   ├── Login.jsx
+│       │   │   ├── Register.jsx
+│       │   │   ├── ForgotPassword.jsx
+│       │   │   └── RegisterProfile.jsx
+│       │   ├── dashboard/
+│       │   │   ├── Groups.jsx
+│       │   │   ├── Profile.jsx
+│       │   │   ├── Settings.jsx
+│       │   │   ├── OverviewStats.jsx
+│       │   │   ├── useDashboardData.jsx
+│       │   │   └── trainingHome/
+│       │   │       ├── TrainingsHeader.jsx
+│       │   │       ├── TrainingTable.jsx
+│       │   │       ├── EditTrainingPopup.jsx
+│       │   │       ├── Pagination.jsx
+│       │   │       └── utilsTrainingHome.jsx
+│       ├── languages/           # translations (JSON)
+│       │   ├── en.json
+│       │   └── cs.json
+│       └── styles/              # CSS styles
+│           ├── App.css
+│           ├── Sidebar.css
+│           ├── colors.css
+│           └── auth/
+│               └── Register.css
 │
-├── .gitignore
-├── README.md
-└── .env                           # citlivé proměnné prostředí
+├── .gitignore                   # files and folders ignored by git
+├── README.md                    # project description
+├── LICENSE                      # project license (e.g. MIT)
+└── .env                         # sensitive environment variables

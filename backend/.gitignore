@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.eggs/
+*.manifest
+*.spec
+*.bak
+*.tmp
+*.log
+
+.env
+.env.*
+**/venv/
+venv/
+ENV/
+env/
+.venv/
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# SQLite
+*.sqlite3
+*.db
+
+# Test/coverage
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+.cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.log
+
+# Jupyter
+.ipynb_checkpoints
+
+# mypy
+.mypy_cache/
+.dmypy.json

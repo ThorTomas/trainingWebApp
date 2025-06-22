@@ -3,6 +3,7 @@ import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { TrainingTable } from "./trainingHome/TrainingTable";
 import { EditTrainingPopup } from "./trainingHome/EditTrainingPopup";
+import  TrainingsHeader  from "./trainingHome/TrainingsHeader";
 import {
   formatDuration,
   parseDurationToMinutes,
@@ -498,117 +499,31 @@ function Home() {
   return (
     <div className="dashboard-box">
       {/* Hlavička s výběrem sezóny a trenérem */}
-      <div className="header">
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <select
-            className="header-select"
-            value={season}
-            onChange={e => setSeason(Number(e.target.value))}
-            disabled={loadingSeasons}
-          >
-            {seasons.map(y => (
-              <option key={y} value={y}>{y}</option>
-            ))}
-          </select>
-          {/* Výběr počtu cyklů (řádků na stránku) */}
-          <select
-            className="header-select"
-            value={pageSize}
-            onChange={e => {
-              const val = Number(e.target.value);
-              setPageSize(val > 0 ? val : 1);
-              localStorage.setItem("dashboardPageSize", val);
-
-              // Pokud přepínáš na "all cycles", zruš filtr cyklů
-              if (val === days.length) {
-                setSelectedCycles([]);
-              }
-
-              if (val === 28 || val === 56) {
-                setSelectedCycles([]);
-                setSearchColumn(null);
-                setSearchValue("");
-                setSortBy("date");
-                setSortDir("asc");
-              }
-              
-              // Pokud je aktivní goToTodayAfterSeasonChange, nenech stránku přepsat na 1
-              if (!goToTodayAfterSeasonChange) {
-                setPage(1);
-                // Najdi stránku s dnešním datem
-                const todayIndex = days.findIndex(day => day.date === todayStr);
-                let newPage = 1;
-                if (val === 28 || val === 56) {
-                  if (todayIndex < firstMondayIndex) {
-                    newPage = 1;
-                  } else {
-                    newPage = 2 + Math.floor((todayIndex - firstMondayIndex) / val);
-                  }
-                } else {
-                  newPage = 1 + Math.floor(todayIndex / val);
-                }
-                setPage(newPage);
-              }
-            }}
-            style={{ minWidth: 120 }}
-          >
-            <option value={days.length}>{t("all_cycles")}</option>
-            <option value={28}>{t("one_cycle")}</option>
-            <option value={56}>{t("two_cycles")}</option>
-          </select>
-          <Pagination page={page} pageCount={pageCount} setPage={setPage} />
-          <button
-            type="button"
-            className="header-btn"
-            onClick={() => {
-              // Najdi stránku s dnešním datem
-              const currentSeason = getCurrentSeason();
-              if (season !== currentSeason) {
-                setSeason(currentSeason);
-                setTimeout(() => {
-                  setGoToTodayAfterSeasonChange(true);
-                }, 50);
-              } else {
-                // Pokud už jsme v aktuální sezóně, jen přepni stránku a scrolluj
-                const todayIndex = days.findIndex(day => day.date === todayStr);
-                let newPage = 1;
-                if (pageSize === 28 || pageSize === 56) {
-                  if (todayIndex < firstMondayIndex) {
-                    newPage = 1;
-                  } else {
-                    newPage = 2 + Math.floor((todayIndex - firstMondayIndex) / pageSize);
-                  }
-                } else {
-                  newPage = 1 + Math.floor(todayIndex / pageSize);
-                }
-                setPage(newPage);
-                // Scroll na dnešní řádek po přepnutí stránky (timeout kvůli renderu)
-                setTimeout(() => {
-                  const el = document.getElementById("today-row");
-                  if (el) {
-                    el.scrollIntoView({ block: "center", behavior: "smooth" });
-                  }
-                }, 200);
-              }
-            }}
-            style={{ minWidth: 36, minHeight: 36, borderRadius: 6, cursor: "pointer" }}
-            title={t("go_to_today")}
-          >
-            {t("today")}
-          </button>
-        </div>
-        <div className="header-coach-avatar" title={user?.profile?.coach ? `${user.profile.coach.first_name} ${user.profile.coach.last_name}` : "No Coach Assigned"}>
-          {user?.profile?.coach?.profilePhotoUrl ? (
-            <img
-              src={user.profile.coach.profilePhotoUrl}
-              alt="Coach"
-              className="header-coach-photo"
-            />
-          ) : (
-            <span className="header-coach-plus">+</span>
-          )}
-        </div>
-      </div>
+      <TrainingsHeader
+        seasons={seasons}
+        loadingSeasons={loadingSeasons}
+        season={season}
+        setSeason={setSeason}
+        days={days}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        setSelectedCycles={setSelectedCycles}
+        setSearchColumn={setSearchColumn}
+        setSearchValue={setSearchValue}
+        setSortBy={setSortBy}
+        setSortDir={setSortDir}
+        goToTodayAfterSeasonChange={goToTodayAfterSeasonChange}
+        setGoToTodayAfterSeasonChange={setGoToTodayAfterSeasonChange}
+        setPage={setPage}
+        todayStr={todayStr}
+        getCurrentSeason={getCurrentSeason}
+        firstMondayIndex={firstMondayIndex}
+        t={t}
+        user={user}
+        page={page}
+        pageCount={pageCount}
+        currentSeason={getCurrentSeason()}
+      />
       {/* Tabulka tréninků */}
       <div className="dashboard-content">
         <TrainingTable

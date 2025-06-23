@@ -1,7 +1,7 @@
 # Tendo (TrainingWebApp)
 
 🏃 **Tendor** is a modern web application for creating and managing training plans and training diaries.
-- ✅ It allows users to build custom training plans, log completed activities, and track their progress.
+✅ It allows users to build custom training plans, log completed activities, and track their progress.
 
 🔮 **Future plans**
 - [ ] Move the project to FastAPI
@@ -35,11 +35,13 @@
 ---
 
 ## 📂 Project structure
+```bash
 trainingWebApp/
 ├── backend/ # Flask server, API routes, models, services
 ├── frontend/ # React frontend with dashboard and auth
-└── .env # configuration and secrets
-➡ See `project_struc.txt` for details
+└── .env # Configuration and secrets
+```
+👉 For full details, see [`project_struc.txt`](project_struc.txt)
 
 ---
 
@@ -73,5 +75,5 @@ Tomáš Thoř
 thor.tomik@gmail.com
 
 ## 💡 Notes
-The project is in development and may contain incomplete features.
+The project is in development and may contain incomplete features. Issues and feature requests are welcome! Feel free to check [issues page](../../issues).
 

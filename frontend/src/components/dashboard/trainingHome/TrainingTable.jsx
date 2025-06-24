@@ -1,4 +1,5 @@
 import React from "react";
+import "../../../styles/Home.css";
 import { Pencil } from "lucide-react";
 import { isPhaseEmpty } from "./utilsTrainingHome";
 

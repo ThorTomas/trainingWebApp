@@ -1,4 +1,4 @@
 # Visual Folder
 visual/
 
-.code-workspace
+**/*.code-workspace

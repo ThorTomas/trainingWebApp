@@ -1,7 +1,7 @@
 import React from "react";
 import { Pagination } from "./Pagination";
 
-export default function TrainingsHeader({
+export function TrainingsHeader({
   seasons,
   loadingSeasons,
   season,
@@ -122,15 +122,15 @@ export default function TrainingsHeader({
           {t("today")}
         </button>
       </div>
-      <div className="header-coach-avatar" title={user?.profile?.coach ? `${user.profile.coach.first_name} ${user.profile.coach.last_name}` : "No Coach Assigned"}>
+      <div className="header-avatar" title={user?.profile?.coach ? `${user.profile.coach.first_name} ${user.profile.coach.last_name}` : "No Coach Assigned"}>
         {user?.profile?.coach?.profilePhotoUrl ? (
           <img
             src={user.profile.coach.profilePhotoUrl}
             alt="Coach"
-            className="header-coach-photo"
+            className="header-photo"
           />
         ) : (
-          <span className="header-coach-plus">+</span>
+          <span className="header-plus">+</span>
         )}
       </div>
     </div>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import "../../styles/Home.css";
 import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { TrainingTable } from "./trainingHome/TrainingTable";
 import { EditTrainingPopup } from "./trainingHome/EditTrainingPopup";
-import  TrainingsHeader  from "./trainingHome/TrainingsHeader";
+import { TrainingsHeader } from "./trainingHome/TrainingsHeader";
 import {
   formatDuration,
   parseDurationToMinutes,

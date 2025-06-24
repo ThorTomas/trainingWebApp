@@ -62,7 +62,7 @@ def forgot_password():
     if not user:
         return jsonify({'error': 'Email not found.'}), 404
 
-    # Vygeneruj reset token (můžeš použít stejnou logiku jako pro aktivaci)
+    # Vygeneruj reset token
     reset_token = generate_user_management_token(user)
     user.reset_token = reset_token
     user.reset_token_expiry = datetime.utcnow() + timedelta(hours=2)

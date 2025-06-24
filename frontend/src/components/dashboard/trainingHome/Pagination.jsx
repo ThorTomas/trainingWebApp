@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import "../../../styles/Home.css";
 
 export function Pagination({ page, pageCount, setPage }) {
   if (!pageCount || isNaN(pageCount) || pageCount <= 1) return null;

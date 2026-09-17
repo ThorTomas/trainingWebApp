@@ -2,3 +2,6 @@
 visual/
 
 **/*.code-workspace
+
+# Flask instance folder (local DB, per-environment files)
+backend/instance/
